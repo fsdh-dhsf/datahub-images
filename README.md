@@ -1,2 +1,2 @@
 # datahub-repo-template
-Default teamplate for fsdh repo 
+Default teamplate for fsdh repo
