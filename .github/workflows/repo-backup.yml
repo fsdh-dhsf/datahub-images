@@ -1,0 +1,22 @@
+name: repo backup
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+
+jobs:
+  repo-backup:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # retrieve all history
+
+    - name: Create ZIP bundle
+      run: |
+        ZIP_FILE=`basename ${{ github.repository }}`-`date '+%Y-%m-%d'`.zip
+        zip -rq "${ZIP_FILE}" .
+        mkdir -p ${{ github.repository }}
+        mv "${ZIP_FILE}" ${{ github.repository }}
